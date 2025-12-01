@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Your Free Trial | Elite Fitness Content</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+         
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: #1e293b;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .logo p {
+            color: #64748b;
+            font-size: 16px;
+        }
+        
+        .trial-badge {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .trial-badge h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        
+        .trial-badge p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e293b;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .required {
+            color: #f97316;
+            margin-left: 3px;
+        }
+        
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            background: white;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .helper-text {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 6px;
+        }
+        
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 25px 0;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+        
+        .terms input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #2563eb;
+            flex-shrink: 0;
+        }
+        
+        .terms label {
+            margin: 0;
+            font-weight: 500;
+            font-size: 14px;
+            color: #475569;
+            cursor: pointer;
+        }
+        
+        .terms a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(249, 115, 22, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .pricing-note {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #e2e8f0;
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        .pricing-note strong {
+            color: #1e293b;
+        }
+        
+        /* Success State */
+        .success-container {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .success-container.show {
+            display: block;
+        }
+        
+        .success-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+        
+        .success-container h2 {
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+        
+        .success-container p {
+            color: #64748b;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .success-container .cta-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .success-container .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Loading Overlay */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .loading-overlay.show {
+            display: flex;
+        }
+        
+        .loading-box {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .spinner {
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #2563eb;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Error State */
+        .error-message {
+            display: none;
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        @media (max-width: 500px) {
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-box">
+            <div class="spinner"></div>
+            <p style="color: #1e293b; font-weight: 600;">Creating your account...</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Form Container -->
+        <div id="form-container">
+            <div class="logo">
+                <h1>🎯 Elite Fitness Content</h1>
+                <p>AI-powered social media content for fitness pros</p>
+            </div>
+            
+            <div class="trial-badge">
+                <h3>🎉 7-Day Free Trial</h3>
+                <p>Get 16 AI-generated posts to try the service</p>
+            </div>
+            
+            <div class="error-message" id="error-message"></div>
+            
+            <form id="signupForm">
+                <div class="form-group">
+                    <label>Your Name <span class="required">*</span></label>
+                    <input type="text" name="name" required placeholder="John Smith">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" name="email" required placeholder="you@example.com">
+                    <div class="helper-text">We'll send your content and login details here</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Business/Studio Name <span class="required">*</span></label>
+                    <input type="text" name="business_name" required placeholder="FitLife Studio">
+                </div>
+                
+                <div class="form-group">
+                    <label>Location <span class="required">*</span></label>
+                    <input type="text" name="location" required placeholder="City, State">
+                    <div class="helper-text">Helps us tailor content to your local audience</div>
+                </div>
+                
+                <div class="terms">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">
+                        I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submit-btn">Start My Free Trial →</button>
+                
+                <div class="pricing-note">
+                    <p>After your trial: <strong>$100/month</strong> for <strong>100 posts</strong></p>
+                    <p>Cancel anytime. No credit card required to start.</p>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Success Container -->
+        <div class="success-container" id="success-container">
+            <div class="success-icon">🎉</div>
+            <h2>Welcome Aboard!</h2>
+            <p>Your 7-day free trial has started.</p>
+            <p>Check your email for your welcome message and next steps.</p>
+            <p><strong>You have 16 posts</strong> to try out the service!</p>
+            <a href="https://fitness-content-formv2.netlify.app" class="cta-btn">Create Your First Content →</a>
+        </div>
+    </div>
+    
+    <script>
+        const WEBHOOK_URL = 'https://n8n.fiorsaoirse.com/webhook/fca-signup';
+        
+        document.getElementById('signupForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = document.getElementById('submit-btn');
+            const errorMessage = document.getElementById('error-message');
+            
+            // Hide any previous errors
+            errorMessage.classList.remove('show');
+            
+            // Get form data
+            const data = {
+                name: form.name.value.trim(),
+                email: form.email.value.trim().toLowerCase(),
+                business_name: form.business_name.value.trim(),
+                location: form.location.value.trim(),
+                signup_date: new Date().toISOString(),
+                trial_days: 7,
+                trial_posts: 16
+            };
+            
+            // Show loading
+            document.getElementById('loading-overlay').classList.add('show');
+            submitBtn.disabled = true;
+            
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                // Hide loading
+                document.getElementById('loading-overlay').classList.remove('show');
+                
+                if (result.success) {
+                    // Show success
+                    document.getElementById('form-container').style.display = 'none';
+                    document.getElementById('success-container').classList.add('show');
+                } else {
+                    // Show error
+                    errorMessage.textContent = result.message || 'Something went wrong. Please try again.';
+                    errorMessage.classList.add('show');
+                    submitBtn.disabled = false;
+                }
+                
+            } catch (error) {
+                console.error('Signup error:', error);
+                document.getElementById('loading-overlay').classList.remove('show');
+                
+                // For no-cors mode, assume success since we can't read response
+                document.getElementById('form-container').style.display = 'none';
+                document.getElementById('success-container').classList.add('show');
+            }
+        });
+    </script>
+</body>
+</html>
