@@ -84,8 +84,15 @@
             margin-left: 3px;
         }
         
+        .optional {
+            color: #94a3b8;
+            font-weight: 400;
+            margin-left: 3px;
+        }
+        
         input[type="text"],
-        input[type="email"] {
+        input[type="email"],
+        select {
             width: 100%;
             padding: 14px 16px;
             border: 2px solid #e2e8f0;
@@ -96,7 +103,8 @@
             background: white;
         }
         
-        input:focus {
+        input:focus,
+        select:focus {
             outline: none;
             border-color: #2563eb;
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
@@ -337,6 +345,27 @@
                     <div class="helper-text">Helps us tailor content to your local audience</div>
                 </div>
                 
+                <!-- NEW: Referral Code Field -->
+                <div class="form-group">
+                    <label>Referral or Promo Code <span class="optional">(optional)</span></label>
+                    <input type="text" name="referral_code" id="referral_code" placeholder="e.g., FITLAUNCH50">
+                </div>
+                
+                <!-- NEW: How Did You Hear About Us -->
+                <div class="form-group">
+                    <label>How did you hear about us? <span class="optional">(optional)</span></label>
+                    <select name="how_heard" id="how_heard">
+                        <option value="">Select one...</option>
+                        <option value="reddit">Reddit</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="google">Google Search</option>
+                        <option value="friend">Friend or Colleague</option>
+                        <option value="podcast">Podcast</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
                 <div class="terms">
                     <input type="checkbox" id="terms" name="terms" required>
                     <label for="terms">
@@ -367,6 +396,15 @@
     <script>
         const WEBHOOK_URL = 'https://jmac.app.n8n.cloud/webhook/fca-signup';
         
+        // NEW: Auto-fill referral code from URL parameter
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref') || urlParams.get('referral') || urlParams.get('promo');
+            if (refCode) {
+                document.getElementById('referral_code').value = refCode.toUpperCase();
+            }
+        })();
+        
         document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -377,12 +415,14 @@
             // Hide any previous errors
             errorMessage.classList.remove('show');
             
-            // Get form data
+            // Get form data (UPDATED: includes referral fields)
             const data = {
                 name: form.name.value.trim(),
                 email: form.email.value.trim().toLowerCase(),
                 business_name: form.business_name.value.trim(),
                 location: form.location.value.trim(),
+                referral_code: form.referral_code.value.trim().toUpperCase() || null,
+                how_heard: form.how_heard.value || null,
                 signup_date: new Date().toISOString(),
                 trial_days: 7,
                 trial_posts: 16
